@@ -24,6 +24,7 @@ class LoginView(APIView):
         
         if user is not None:
             refresh = RefreshToken.for_user(user)
+            print(refresh)
             return Response({
                 'refresh': str(refresh),
                 'access': str(refresh.access_token),
@@ -36,6 +37,7 @@ from .models import Product
 from .serializers import ProductSerializer
 
 class ProductListAPIView(generics.ListAPIView):
+    
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 

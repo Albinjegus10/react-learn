@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+
+
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -19,7 +21,7 @@ const Login = () => {
             localStorage.setItem('username', username); // Store username in localStorage
 
             // Navigate to the home page after successful login
-            navigate('/Home2', { state: { username } });
+            navigate('/Home', { state: { username } });
         } catch (error) {
             console.error(error);
         }

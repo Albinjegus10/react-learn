@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './HomePage.css';
+import ImgMediaCard from '../components/ImgMediaCard';
 
 function HomePage() {
     const [products, setProducts] = useState([]);
@@ -9,6 +11,7 @@ function HomePage() {
 
         fetchProducts();
     }, []);
+
     const fetchProducts = async () => {
       try {
           const response = await axios.get('http://localhost:8000/api/accounts/products/');
@@ -20,23 +23,25 @@ function HomePage() {
 
     return (
         <div>
-            <h1>Welcome to Our E-commerce Website</h1>
-            <p>Browse our products and find the best deals.</p>
+            {/* Banner Section */}
+            <div className="banner">
+                <div className="banner-text">
+                    
+                </div>
+            </div>
+            <div className="product-intro">
+                <h2>Featured Products</h2>
+                <p>Explore our top picks of the season.</p>
+            </div>
             <div className="product-list">
                 {products.map((product) => (
-                    <div key={product.id} className="product-item">
-                        
-                        {product.image && (
-                                <img
-                                    src={product.image}
-                                    alt={product.name}
-                                    style={{ width: '70%', height: '70%', objectFit: 'cover' }}
-                                />
-                            )}
-                          <h2>{product.name}</h2>
-                        <p>{product.description}</p>
-                        <p>Price: Rs {product.price}</p>
-                    </div>
+                    <ImgMediaCard
+                        key={product.id}
+                        image={product.image}
+                        title={product.name}
+                        description={product.description}
+                        price={product.price}
+                    />
                 ))}
             </div>
         </div>
